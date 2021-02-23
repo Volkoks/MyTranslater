@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytranslater.databinding.ItemRvMainFragmentBinding
 import com.example.mytranslater.model.entites.Word
+import com.example.mytranslater.utils.convertMeaningsToString
 
 class MainFragmentAdapter : RecyclerView.Adapter<MainFragmentAdapter.ViewHolder>() {
 
@@ -31,6 +32,7 @@ class MainFragmentAdapter : RecyclerView.Adapter<MainFragmentAdapter.ViewHolder>
 
         fun bind(data: Word) {
             binding.tvItemRvWord.text = data.text
+            binding.tvItemRvWordTranslate.text = data.meanings?.let { convertMeaningsToString(it) }
         }
 
     }

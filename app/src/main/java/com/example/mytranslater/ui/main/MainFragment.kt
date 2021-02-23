@@ -1,41 +1,46 @@
-package com.example.mytranslater.ui
+package com.example.mytranslater.ui.main
 
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mytranslater.R
-import com.example.mytranslater.contract.ContractMainFragment
+import com.example.mytranslater.application.MyApp
 import com.example.mytranslater.databinding.FragmentMainBinding
 import com.example.mytranslater.model.state.AppState
-import com.example.mytranslater.presenter.MainFragmentPresenter
 import com.example.mytranslater.ui.adapter.MainFragmentAdapter
+import javax.inject.Inject
 
 
-class MainFragment : Fragment(R.layout.fragment_main), ContractMainFragment.View {
+class MainFragment : Fragment(R.layout.fragment_main) {
 
     companion object {
         fun newInstance() = MainFragment()
     }
 
-    private val presenter: MainFragmentPresenter<AppState, ContractMainFragment.View> by lazy {
-        MainFragmentPresenter()
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: MainFragmentViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(MainFragmentViewModel::class.java)
     }
     private var adapter: MainFragmentAdapter? = null
     private var binding: FragmentMainBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        MyApp.instance.appComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
+        viewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
         binding = FragmentMainBinding.bind(view)
         binding?.mbTilSerch?.setOnClickListener {
-            presenter.getData(binding?.tietMainFragment?.text.toString(), true)
+            viewModel.getData(binding?.tietMainFragment?.text.toString())
         }
 
     }
 
-    override fun renderData(appState: AppState) {
+    fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Succes -> {
                 binding?.progressMainFradment?.visibility = ViewGroup.GONE
@@ -67,15 +72,6 @@ class MainFragment : Fragment(R.layout.fragment_main), ContractMainFragment.View
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        presenter.attachView(this)
-    }
-
-    override fun onStop() {
-        presenter.detachView(this)
-        super.onStop()
-    }
 
     override fun onDestroy() {
         super.onDestroy()
