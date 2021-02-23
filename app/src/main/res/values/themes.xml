@@ -13,4 +13,21 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="BaseTextStyle" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_standard</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="HeaderTextStyle" parent="BaseTextStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_standard_header</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ItemRvMainFragment" parent="CardView">
+        <item name="cardBackgroundColor">@color/teal_200</item>
+        <item name="cardCornerRadius">16dp</item>
+    </style>
 </resources>
