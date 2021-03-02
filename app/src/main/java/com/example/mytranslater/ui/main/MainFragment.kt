@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mytranslater.R
 import com.example.mytranslater.application.MyApp
 import com.example.mytranslater.databinding.FragmentMainBinding
+import com.example.mytranslater.model.entites.Word
 import com.example.mytranslater.model.state.AppState
+import com.example.mytranslater.ui.adapter.IItemClickListener
 import com.example.mytranslater.ui.adapter.MainFragmentAdapter
+import com.example.mytranslater.ui.screen_word.WordFragment
 import javax.inject.Inject
 
 
@@ -23,17 +26,48 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private val viewModel: MainFragmentViewModel by lazy {
         ViewModelProvider(this, viewModelFactory).get(MainFragmentViewModel::class.java)
     }
     private var adapter: MainFragmentAdapter? = null
     private var binding: FragmentMainBinding? = null
+    private val itemClick: IItemClickListener =
+        object : IItemClickListener {
+            override fun onClick(data: Word) {
+                data.text?.let {
+                    data.meanings?.get(0)?.let { it1 ->
+                        it1.translation?.translation?.let { it2 ->
+                            it1.imageUrl?.let { it3 ->
+                                WordFragment.newInstance(
+                                    it,
+                                    it2,
+                                    it3
+                                )
+                            }
+                        }
+                    }
+                }
+                    ?.let {
+                        activity?.supportFragmentManager?.beginTransaction()
+                            ?.replace(
+                                R.id.fragment_container,
+                                it
+                            )
+                            ?.addToBackStack("WordFragment")
+                            ?.commit()
+                    }
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         MyApp.instance.appComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
         viewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
         binding = FragmentMainBinding.bind(view)
+
+
+
         binding?.mbTilSerch?.setOnClickListener {
             viewModel.getData(binding?.tietMainFragment?.text.toString())
         }
@@ -46,7 +80,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 binding?.progressMainFradment?.visibility = ViewGroup.GONE
                 val data = appState.data
                 if (adapter == null) {
-                    adapter = MainFragmentAdapter()
+                    adapter = MainFragmentAdapter(itemClick)
                     binding?.rvMainFragment?.layoutManager =
                         LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
                     binding?.rvMainFragment?.adapter = adapter
@@ -72,6 +106,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
+
+    override fun onPause() {
+        super.onPause()
+        adapter = null
+    }
 
     override fun onDestroy() {
         super.onDestroy()

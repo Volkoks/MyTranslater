@@ -4,6 +4,7 @@ package com.example.mytranslater.di
 import android.content.Context
 import com.example.mytranslater.di.appmodules.*
 import com.example.mytranslater.ui.main.MainFragment
+import com.example.mytranslater.ui.screen_word.WordFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -30,4 +31,5 @@ interface AppComponent {
     }
 
     fun inject(mainFragment: MainFragment)
+    fun inject(wordFragment: WordFragment)
 }
