@@ -3,6 +3,7 @@ package com.example.mytranslater.di.appmodules
 import com.example.mytranslater.model.datasource.retrofit.api.IWordApiService
 import com.example.mytranslater.model.networkstatus.INetworkStatus
 import com.example.mytranslater.utils.AppNetworkStatus
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -27,7 +28,7 @@ class ApiModule {
     fun api(@Named("baseUrl") baseUrl: String): IWordApiService {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .client(createOkHttpClient(PODInterceptor()))
             .build()
