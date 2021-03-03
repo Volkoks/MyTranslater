@@ -1,4 +1,4 @@
-package com.example.mytranslater.di.appmodules
+package com.example.mytranslater.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

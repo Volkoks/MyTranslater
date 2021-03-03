@@ -106,11 +106,7 @@ class WordFragment : Fragment(R.layout.word_fragment) {
                 }
 
             })
-            .apply(
-                RequestOptions()
-                    .placeholder(R.drawable.place_holder)
-                    .centerCrop()
-            )
+
             .into(imageView)
     }
 }

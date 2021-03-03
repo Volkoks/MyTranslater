@@ -2,7 +2,7 @@ package com.example.mytranslater.di
 
 
 import android.content.Context
-import com.example.mytranslater.di.appmodules.*
+import com.example.mytranslater.di.modules.*
 import com.example.mytranslater.ui.main.MainFragment
 import com.example.mytranslater.ui.screen_word.WordFragment
 import dagger.BindsInstance
@@ -15,7 +15,8 @@ import javax.inject.Singleton
         ApiModule::class,
         InteractorModule::class,
         RepositoryModule::class,
-        ViewModelModule::class
+        ViewModelModule::class,
+        DatabaseModule::class
     ]
 )
 @Singleton
@@ -24,7 +25,7 @@ interface AppComponent {
     @Component.Builder
     interface Builder {
 
-        @BindsInstance
+            @BindsInstance
         fun app(context: Context): Builder
 
         fun build(): AppComponent

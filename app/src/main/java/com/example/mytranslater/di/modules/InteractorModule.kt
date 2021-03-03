@@ -1,4 +1,4 @@
-package com.example.mytranslater.di.appmodules
+package com.example.mytranslater.di.modules
 
 import com.example.mytranslater.model.entites.Word
 import com.example.mytranslater.model.repository.Repository
