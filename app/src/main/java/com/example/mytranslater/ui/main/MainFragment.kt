@@ -1,8 +1,7 @@
 package com.example.mytranslater.ui.main
 
 import android.os.Bundle
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +13,7 @@ import com.example.mytranslater.model.entites.Word
 import com.example.mytranslater.model.state.AppState
 import com.example.mytranslater.ui.adapter.IItemClickListener
 import com.example.mytranslater.ui.adapter.MainFragmentAdapter
+import com.example.mytranslater.ui.history.HistoryFragment
 import com.example.mytranslater.ui.screen_word.WordFragment
 import javax.inject.Inject
 
@@ -63,15 +63,32 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         MyApp.instance.appComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+
         viewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
         binding = FragmentMainBinding.bind(view)
-
-
 
         binding?.mbTilSerch?.setOnClickListener {
             viewModel.getData(binding?.tietMainFragment?.text.toString())
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_menu_history -> {
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.fragment_container, HistoryFragment.newInstance())
+                    ?.addToBackStack("historyFragment")
+                    ?.commit()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun renderData(appState: AppState) {

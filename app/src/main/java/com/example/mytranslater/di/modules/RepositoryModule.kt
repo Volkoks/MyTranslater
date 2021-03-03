@@ -7,6 +7,7 @@ import com.example.mytranslater.model.datasource.room.LocalDataSource
 import com.example.mytranslater.model.datasource.retrofit.datasource.RemoteDataSource
 import com.example.mytranslater.model.entites.Word
 import com.example.mytranslater.model.networkstatus.INetworkStatus
+import com.example.mytranslater.model.repository.HistoryWordRepo
 import com.example.mytranslater.model.repository.RepoWordImpl
 import com.example.mytranslater.model.repository.Repository
 import com.example.mytranslater.model.room.history_word.HistoryWordDatabase
@@ -30,9 +31,17 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideRepo(
+    @Named(MAIN_REPO)
+    fun provideMainRepo(
         remoteDataSource: DataSource<List<Word>>,
         localDataSource: DataSourceLocal<List<Word>>,
         networkStatus: INetworkStatus
     ): Repository<List<Word>> = RepoWordImpl(remoteDataSource, localDataSource, networkStatus)
+
+    @Provides
+    @Singleton
+    @Named(HISTORY_REPO)
+    fun provideHistoryRepo(localDataSource: DataSourceLocal<List<Word>>): Repository<List<Word>> =
+        HistoryWordRepo(localDataSource)
+
 }

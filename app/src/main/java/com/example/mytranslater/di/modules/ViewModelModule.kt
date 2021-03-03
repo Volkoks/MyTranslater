@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.mytranslater.di.annatation.VIewModelKey
 import com.example.mytranslater.di.factory.ViewModelFactory
+import com.example.mytranslater.ui.history.HistoryViewModel
 import com.example.mytranslater.ui.main.MainFragmentViewModel
 import com.example.mytranslater.ui.screen_word.WordViewModel
 import dagger.Binds
@@ -24,4 +25,9 @@ abstract class ViewModelModule {
     @IntoMap
     @VIewModelKey(WordViewModel::class)
     protected abstract fun wordViewModel(wordFragmentViewModel: WordViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @VIewModelKey(HistoryViewModel::class)
+    protected abstract fun historyViewModel(wordFragmentViewModel: HistoryViewModel): ViewModel
 }
