@@ -1,11 +1,11 @@
 package com.example.mytranslater.di.modules
 
-import com.example.mytranslater.model.entites.Word
-import com.example.mytranslater.model.repository.Repository
-import com.example.mytranslater.model.state.AppState
+import com.example.model.entites.Word
+import com.example.model.state.AppState
 import com.example.mytranslater.ui.history.HistoryFragmentInteractor
 import com.example.mytranslater.ui.main.MainFaragmentInteractor
-import com.example.mytranslater.viewmodel.Interactor
+import com.example.core.viewmodel.Interactor
+import com.example.repository.repository.Repository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named

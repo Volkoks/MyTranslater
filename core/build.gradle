@@ -1,0 +1,22 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+dependencies {
+    implementation project(Modules.model)
+    implementation project(Modules.utils)
+
+    implementation Desing.appcompat
+    implementation Coroutines.coroutines
+    implementation Coroutines.coroutines_android
+    implementation Coroutines.coroutines_adapter_retrofit
+
+    testImplementation TestImpl.junit
+    androidTestImplementation TestImpl.android_x_junit
+    androidTestImplementation TestImpl.espresso
+}
+
+repositories {
+    mavenCentral()
+}

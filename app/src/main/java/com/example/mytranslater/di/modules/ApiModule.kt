@@ -1,8 +1,8 @@
 package com.example.mytranslater.di.modules
 
-import com.example.mytranslater.model.datasource.retrofit.api.IWordApiService
-import com.example.mytranslater.model.networkstatus.INetworkStatus
 import com.example.mytranslater.utils.AppNetworkStatus
+import com.example.repository.datasource.retrofit.api.IWordApiService
+import com.example.utils.networkstatus.INetworkStatus
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides

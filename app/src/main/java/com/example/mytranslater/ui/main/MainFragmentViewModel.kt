@@ -2,9 +2,9 @@ package com.example.mytranslater.ui.main
 
 import androidx.lifecycle.LiveData
 import com.example.mytranslater.di.modules.MAIN_INTERACTOR
-import com.example.mytranslater.model.state.AppState
-import com.example.mytranslater.viewmodel.Interactor
-import com.example.mytranslater.viewmodel.base.BaseViewModel
+import com.example.core.viewmodel.Interactor
+import com.example.core.viewmodel.base.BaseViewModel
+import com.example.model.state.AppState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named

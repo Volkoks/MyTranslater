@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytranslater.databinding.ItemRvMainFragmentBinding
-import com.example.mytranslater.model.entites.Word
-import com.example.mytranslater.utils.convertMeaningsToString
+import com.example.model.entites.Word
+import com.example.utils.utils.convertMeaningsToString
 
 class MainFragmentAdapter(
     private val itemClickListener: IItemClickListener
