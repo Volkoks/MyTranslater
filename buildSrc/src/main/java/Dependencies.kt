@@ -24,7 +24,6 @@ object Modules {
 }
 
 object Versions {
-
     //Kotlin
     const val kotlin_version = "1.4.30"
     const val lifecycle = "2.3.0"
