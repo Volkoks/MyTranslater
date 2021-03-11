@@ -1,7 +1,8 @@
-package com.example.mytranslater.ui.main
+package com.example.mytranslater.ui.history
+
 
 import androidx.lifecycle.LiveData
-import com.example.mytranslater.di.modules.MAIN_INTERACTOR
+import com.example.mytranslater.di.modules.HISTORT_INTERACROR
 import com.example.mytranslater.model.state.AppState
 import com.example.mytranslater.viewmodel.Interactor
 import com.example.mytranslater.viewmodel.base.BaseViewModel
@@ -9,9 +10,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
 
-class MainFragmentViewModel @Inject constructor(
-    @Named(MAIN_INTERACTOR)private val interactor: Interactor<AppState>
+class HistoryViewModel @Inject constructor(
+   @Named(HISTORT_INTERACROR) private val interactor: Interactor<AppState>
 ) : BaseViewModel<AppState>() {
+
 
     fun subscribe(): LiveData<AppState> {
         return liveDataForViewToObserve
@@ -29,4 +31,10 @@ class MainFragmentViewModel @Inject constructor(
     override fun errorReturned(t: Throwable) {
         liveDataForViewToObserve.postValue(AppState.Error(t))
     }
+
+    override fun onCleared() {
+        liveDataForViewToObserve.value = AppState.Succes(null)
+        super.onCleared()
+    }
+
 }

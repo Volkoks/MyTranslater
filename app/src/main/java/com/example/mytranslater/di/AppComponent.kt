@@ -2,8 +2,10 @@ package com.example.mytranslater.di
 
 
 import android.content.Context
-import com.example.mytranslater.di.appmodules.*
+import com.example.mytranslater.di.modules.*
+import com.example.mytranslater.ui.history.HistoryFragment
 import com.example.mytranslater.ui.main.MainFragment
+import com.example.mytranslater.ui.screen_word.WordFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -14,7 +16,8 @@ import javax.inject.Singleton
         ApiModule::class,
         InteractorModule::class,
         RepositoryModule::class,
-        ViewModelModule::class
+        ViewModelModule::class,
+        DatabaseModule::class
     ]
 )
 @Singleton
@@ -30,4 +33,6 @@ interface AppComponent {
     }
 
     fun inject(mainFragment: MainFragment)
+    fun inject(wordFragment: WordFragment)
+    fun inject(historyFragment: HistoryFragment)
 }
