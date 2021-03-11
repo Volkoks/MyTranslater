@@ -1,28 +1,33 @@
-package com.example.mytranslater.ui.history
+package com.example.history_screen_feature.history
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.history_screen_feature.di.HistoryComponent
+import com.example.history_screen_feature.di.VIEWMODELFACTORY_HISTORY
 import com.example.mytranslater.R
-import com.example.mytranslater.application.MyApp
 import com.example.mytranslater.databinding.HistoryFragmentBinding
 import com.example.model.entites.Word
 import com.example.model.state.AppState
+import com.example.mytranslater.di.appComponent
 import com.example.mytranslater.ui.adapter.IItemClickListener
 import com.example.mytranslater.ui.adapter.MainFragmentAdapter
 import com.example.mytranslater.ui.screen_word.WordFragment
 import javax.inject.Inject
+import javax.inject.Named
 
 class HistoryFragment : Fragment(R.layout.history_fragment) {
-
+private lateinit var historyComponent: HistoryComponent
     companion object {
         fun newInstance() = HistoryFragment()
     }
 
     @Inject
+    @Named(VIEWMODELFACTORY_HISTORY)
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private var adapter: MainFragmentAdapter? = null
     private val viewModel: HistoryViewModel by lazy {
@@ -47,7 +52,6 @@ class HistoryFragment : Fragment(R.layout.history_fragment) {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        MyApp.instance.appComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
         binding = HistoryFragmentBinding.bind(view)
         viewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
@@ -96,5 +100,15 @@ class HistoryFragment : Fragment(R.layout.history_fragment) {
         viewModel.getData("")
     }
 
+    private fun initDaggerHistoryScreen() {
+        historyComponent = DaggerHistoryComponent
+            .builder
+            .appComponent(appComponent())
+            .build()
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        initDaggerHistoryScreen()
+    }
 
 }

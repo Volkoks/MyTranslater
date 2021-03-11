@@ -1,9 +1,10 @@
 package com.example.mytranslater.di
 
 
+
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.example.mytranslater.di.modules.*
-import com.example.mytranslater.ui.history.HistoryFragment
 import com.example.mytranslater.ui.main.MainFragment
 import com.example.mytranslater.ui.screen_word.WordFragment
 import dagger.BindsInstance
@@ -34,5 +35,9 @@ interface AppComponent {
 
     fun inject(mainFragment: MainFragment)
     fun inject(wordFragment: WordFragment)
-    fun inject(historyFragment: HistoryFragment)
+
 }
+
+fun Fragment.appComponent(): AppComponent =
+    (context as? IAppComponentProvider)?.provideAppComponent()
+        ?: throw IllegalStateException("AppComponent not implemented: $context")

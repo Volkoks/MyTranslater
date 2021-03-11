@@ -1,7 +1,11 @@
+include ':history_screen_feature'
 include ':repository'
 include ':utils'
 include ':model'
 include ':core'
 include ':app'
 rootProject.name = "MyTranslater"
+
+
+
 

@@ -5,4 +5,5 @@
     <string name="enter_text">enter text</string>
     <string name="serch">serch</string>
     <string name="history">history</string>
+    <string name="title_history_screen_feature">History Screen</string>
 </resources>

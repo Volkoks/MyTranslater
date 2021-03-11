@@ -1,6 +1,7 @@
 package com.example.mytranslater.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -13,10 +14,17 @@ import com.example.model.entites.Word
 import com.example.model.state.AppState
 import com.example.mytranslater.ui.adapter.IItemClickListener
 import com.example.mytranslater.ui.adapter.MainFragmentAdapter
-import com.example.mytranslater.ui.history.HistoryFragment
 import com.example.mytranslater.ui.screen_word.WordFragment
+import com.google.android.play.core.splitinstall.SplitInstallManager
+import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
+import com.google.android.play.core.splitinstall.SplitInstallRequest
+import java.lang.Exception
 import javax.inject.Inject
 
+private const val TAG_DEBUG = "---DEBUG MAINFRAGMENT: "
+private const val HISTORY_ACTIVITY_PATH =
+    "com.example.history_screen_feature.history.HistoryActivity"
+private const val HISTORY_ACTIVITY_FEATURE_NAME = "historyScreen"
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -32,6 +40,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
     private var adapter: MainFragmentAdapter? = null
     private var binding: FragmentMainBinding? = null
+    private lateinit var splitInstallManager: SplitInstallManager
     private val itemClick: IItemClickListener =
         object : IItemClickListener {
             override fun onClick(data: Word) {
@@ -82,10 +91,25 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_menu_history -> {
-                activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.fragment_container, HistoryFragment.newInstance())
-                    ?.addToBackStack("historyFragment")
-                    ?.commit()
+//                activity?.supportFragmentManager?.beginTransaction()
+//                    ?.replace(R.id.fragment_container, HistoryFragment.newInstance())
+//                    ?.addToBackStack("historyFragment")
+//                    ?.commit()
+                splitInstallManager = SplitInstallManagerFactory.create(activity)
+                val request = SplitInstallRequest.newBuilder()
+                    .addModule(HISTORY_ACTIVITY_FEATURE_NAME)
+                    .build()
+                splitInstallManager.startInstall(request)
+                    .addOnSuccessListener {
+                        instanceFragment(HISTORY_ACTIVITY_PATH)
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(
+                            activity,
+                            "Couldn't download feature: " + it.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
             }
         }
         return super.onOptionsItemSelected(item)
@@ -123,6 +147,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
+    private fun instanceFragment(classesName: String): Fragment? {
+        return try {
+            Class.forName(classesName).newInstance() as Fragment?
+        } catch (e: Exception) {
+            Log.d(TAG_DEBUG, e.message.toString())
+            null
+        }
+    }
 
     override fun onPause() {
         super.onPause()
@@ -133,4 +165,5 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onDestroy()
         binding = null
     }
+
 }

@@ -1,10 +1,10 @@
-package com.example.mytranslater.ui.history
+package com.example.history_screen_feature.history
 
 
 import androidx.lifecycle.LiveData
-import com.example.mytranslater.di.modules.HISTORT_INTERACROR
 import com.example.core.viewmodel.Interactor
 import com.example.core.viewmodel.base.BaseViewModel
+import com.example.history_screen_feature.di.HISTORT_INTERACROR
 import com.example.model.state.AppState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
