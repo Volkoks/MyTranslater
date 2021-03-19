@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import com.example.mytranslater.application.MyApp
-import com.example.mytranslater.model.networkstatus.INetworkStatus
+import com.example.utils.networkstatus.INetworkStatus
 
 
 class AppNetworkStatus : INetworkStatus {

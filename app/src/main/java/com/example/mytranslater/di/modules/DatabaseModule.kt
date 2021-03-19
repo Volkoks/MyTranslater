@@ -2,9 +2,7 @@ package com.example.mytranslater.di.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.example.mytranslater.application.MyApp
-import com.example.mytranslater.di.AppComponent
-import com.example.mytranslater.model.room.history_word.HistoryWordDatabase
+import com.example.repository.datasource.room.HistoryWordDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mytranslater.R
 import com.example.mytranslater.application.MyApp
 import com.example.mytranslater.databinding.FragmentMainBinding
-import com.example.mytranslater.model.entites.Word
-import com.example.mytranslater.model.state.AppState
+import com.example.model.entites.Word
+import com.example.model.state.AppState
 import com.example.mytranslater.ui.adapter.IItemClickListener
 import com.example.mytranslater.ui.adapter.MainFragmentAdapter
 import com.example.mytranslater.ui.history.HistoryFragment

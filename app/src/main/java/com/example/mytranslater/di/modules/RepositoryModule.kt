@@ -1,23 +1,24 @@
 package com.example.mytranslater.di.modules
 
-import com.example.mytranslater.model.datasource.DataSource
-import com.example.mytranslater.model.datasource.DataSourceLocal
-import com.example.mytranslater.model.datasource.retrofit.api.IWordApiService
-import com.example.mytranslater.model.datasource.room.LocalDataSource
-import com.example.mytranslater.model.datasource.retrofit.datasource.RemoteDataSource
-import com.example.mytranslater.model.entites.Word
-import com.example.mytranslater.model.networkstatus.INetworkStatus
-import com.example.mytranslater.model.repository.HistoryWordRepo
-import com.example.mytranslater.model.repository.RepoWordImpl
-import com.example.mytranslater.model.repository.Repository
-import com.example.mytranslater.model.room.history_word.HistoryWordDatabase
+import com.example.model.entites.Word
+import com.example.utils.networkstatus.INetworkStatus
+import com.example.repository.datasource.DataSource
+import com.example.repository.datasource.DataSourceLocal
+import com.example.repository.datasource.retrofit.api.IWordApiService
+import com.example.repository.datasource.retrofit.datasource.RemoteDataSource
+import com.example.repository.datasource.room.HistoryWordDatabase
+import com.example.repository.datasource.room.LocalDataSource
+import com.example.repository.repository.HistoryWordRepo
+import com.example.repository.repository.RepoWordImpl
+import com.example.repository.repository.Repository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-class RepositoryModule {
+class
+RepositoryModule {
 
     @Provides
     @Singleton

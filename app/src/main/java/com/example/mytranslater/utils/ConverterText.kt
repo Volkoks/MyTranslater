@@ -1,9 +1,9 @@
 package com.example.mytranslater.utils
 
-import com.example.mytranslater.model.entites.Meanings
-import com.example.mytranslater.model.entites.Translation
-import com.example.mytranslater.model.entites.Word
-import com.example.mytranslater.model.room.history_word.HistoryWord
+import com.example.model.entites.Meanings
+import com.example.model.entites.Translation
+import com.example.model.entites.Word
+import com.example.repository.datasource.room.HistoryWord
 
 fun convertMeaningsToString(meanings: List<Meanings>): String {
     var meaningsSeparatedByComma = String()
