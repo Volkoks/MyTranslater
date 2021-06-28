@@ -21,6 +21,9 @@ object Modules {
     const val model = ":model"
     const val repository = ":repository"
     const val utils = ":utils"
+
+    //DynamicFeatures
+    const val history = ":history_screen_feature"
 }
 
 object Versions {
@@ -56,6 +59,9 @@ object Versions {
     const val junit = "4.13.2"
     const val android_x_junit = "1.1.2"
     const val espresso = "3.3.0"
+
+    //Google Play
+    const val googlePlayCore = "1.6.3"
 }
 
 object Kotlin {
@@ -115,4 +121,8 @@ object TestImpl {
     const val junit = "junit:junit:${Versions.junit}"
     const val android_x_junit = "androidx.test.ext:junit:${Versions.android_x_junit}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+}
+
+object GooglePlay {
+    const val googlePlayCore = "com.google.android.play:core:${Versions.googlePlayCore}"
 }

@@ -1,4 +1,4 @@
-package com.example.mytranslater.ui.history
+package com.example.history_screen_feature.history
 
 import com.example.mytranslater.di.modules.HISTORY_REPO
 import com.example.model.entites.Word
